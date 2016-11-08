@@ -9,6 +9,9 @@ public class castletimeadventure : MonoBehaviour {
 
     public AudioClip winSound;
     public AudioClip roarsound;
+    public AudioClip trollsound;
+    public AudioClip sadsound;
+    public AudioClip ghostsound;
 
     public Image pictureofcastle;
     public Image keyImage;
@@ -119,7 +122,7 @@ public class castletimeadventure : MonoBehaviour {
         else if (currentRoom == "bush")
         {
             // mainCam.backgroundColor = Color.green;
-            GetComponent<Text>().color = Color.blue;
+            GetComponent<Text>().color = Color.grey;
 
             myText = "You found a sword and decided to keep it, deciding it can help defend you from anything that presents danger.\n\n\nPress spacebar to return to the garden.";
             if (!hasSword)
@@ -169,6 +172,12 @@ public class castletimeadventure : MonoBehaviour {
         }
         else if (currentRoom == "door 4")
         {
+            sfxSource.clip = ghostsound;
+            if (!sfxSource.isPlaying)
+            {
+                sfxSource.Play();
+            }
+
             myText = "The servent looks at you with a shield in his hand. You ask him if you can get the shield, but he will only give it to you if you answer his question:\nI am less than 30 and I am not 29.\nI am the next number in this pattern: 16, 18, 20, ___ .\n\n\n";
             myText += "Press up for 21\nPress down for 22\nPress right for 25\nPress left for 27";
             //if (!hasShield)
@@ -191,7 +200,7 @@ public class castletimeadventure : MonoBehaviour {
                 }
                 if (riddle == "servant")
                 {
-                    myText = "You will die now! Goodnight Tresspasser\n";
+                    myText = "You will die now! (You've died).\n";
                     myText += "Press Space to Go Back to the Beginning.";
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
@@ -254,7 +263,13 @@ public class castletimeadventure : MonoBehaviour {
 
             if (hasSword && hasShield)
             {
-                myText = "You tried to kill the Troll, HURRAH, but then you saw his daughters crowding around his dead body.";
+                sfxSource.clip = sadsound;
+                if (!sfxSource.isPlaying)
+                {
+                    sfxSource.Play();
+                }
+                myText = "You see the troll looking at you with hungry eyes, but you came prepared.\n";
+                myText += "You killed the Troll, HURRAH, but then you saw his daughters crowding around his dead body.";
                 myText += "You see the orphaned children crying in their father's arms and you run away from the castle feeling horrible about his murder.";
                 myText += "\n\nCongrats you become a Monster. The End D=\n\n\nCredits to Stella for helping me on my time of need.\nPress Space to return to the beginning.";
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -264,6 +279,11 @@ public class castletimeadventure : MonoBehaviour {
             }
             else
             {
+                sfxSource.clip = trollsound;
+                if (!sfxSource.isPlaying)
+                {
+                    sfxSource.Play();
+                }
 
                 myText = "There is a starving Troll that looks at you with hungry eyes and you scurry away.\n\n Press space to return to the hallway";
 
